@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Blog # manager objects
 
 # Create your views here.
 def index(request):
-    return render(request,"crud/index.html")
+    blog = Blog.objects.all()
+    print(blog)
+    
+
+    return render(request,"crud/index.html",{"blogs":blog})
 
 
 def about(request):
