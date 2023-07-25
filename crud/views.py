@@ -7,7 +7,7 @@ from .forms import BlogForm
 # Create your views here.
 def index(request):
     blog = Blog.objects.all()
-    return render(request,"crud/index.html",{"blogs":blog})
+    return render(request,"crud/home.html",{"blogs":blog})
 
 
 def about(request):
@@ -19,6 +19,20 @@ def create(request):
         form.save()
         return  redirect("home")
     return render(request,"crud/create.html",{"form":form})
+
+def deleteBlog(request,id):
+    blog = Blog.objects.get(id=id)
+    blog.delete()
+    return redirect("home")
+
+def updateBlog(request,id):
+    blog = Blog.objects.get(id=id)
+    form = BlogForm(request.POST or None,instance=blog)
+    if (form.is_valid()):
+        form.save()
+        return redirect("home")
+    return render(request,"crud/create.html",{"form":form})
+    
 
 def partData(request,id):
     blog = Blog.objects.get(id=id)
@@ -39,9 +53,8 @@ def contacts(request):
         )
 
         contacts.save()
+        return redirect("home")
       
-        
-    
-    
+           
 
     return render(request,"crud/contactus.html")
