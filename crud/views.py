@@ -18,7 +18,7 @@ def create(request):
     if form.is_valid():
         form.save()
         return  redirect("home")
-    return render(request,"crud/create.html",{"form":form})
+    return render(request,"crud/createblog.html",{"form":form})
 
 def deleteBlog(request,id):
     blog = Blog.objects.get(id=id)
@@ -57,4 +57,4 @@ def contacts(request):
       
            
 
-    return render(request,"crud/contactus.html")
+    return render(request,"crud/contact.html")
