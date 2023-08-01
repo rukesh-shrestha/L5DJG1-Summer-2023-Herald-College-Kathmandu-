@@ -15,7 +15,7 @@
 <h1>{{blog.title}}</h1>
 <h5>{{blog.description}}</h5>
 
-<a href="{%url 'deleteblog' blog.id%}" type="submit">Delete</a>
-<a href="{%url 'updateblog' blog.id%}" type="Update">Update</a>
+<a href="{%url 'crud:deleteblog' blog.id%}" type="submit">Delete</a>
+<a href="{%url 'crud:updateblog' blog.id%}" type="Update">Update</a>
 
 {%endif%}

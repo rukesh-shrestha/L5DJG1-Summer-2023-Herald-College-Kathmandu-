@@ -7,6 +7,13 @@ from .forms import BlogForm
 # Create your views here.
 def index(request):
     blog = Blog.objects.all()
+    if(request.method == "POST"):
+        searchData = request.POST.get("search")
+        if(searchData != ""):
+            data = Blog.objects.filter(title__icontains=searchData)
+            return render(request,"crud/home.html",{'blogs':data})
+
+      
     return render(request,"crud/home.html",{"blogs":blog})
 
 
@@ -17,21 +24,27 @@ def create(request):
     form = BlogForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return  redirect("home")
+        return  redirect("crud:home")
     return render(request,"crud/createblog.html",{"form":form})
 
 def deleteBlog(request,id):
     blog = Blog.objects.get(id=id)
     blog.delete()
-    return redirect("home")
+    return redirect("crud:home")
 
 def updateBlog(request,id):
     blog = Blog.objects.get(id=id)
     form = BlogForm(request.POST or None,instance=blog)
     if (form.is_valid()):
         form.save()
-        return redirect("home")
-    return render(request,"crud/create.html",{"form":form})
+        return redirect("crud:home")
+    context = {
+        "form":form,
+        "title":blog.title,
+        "subheading":blog.subheading,
+        "description":blog.description
+    }
+    return render(request,"crud/createblog.html",context)
     
 
 def partData(request,id):
@@ -40,7 +53,7 @@ def partData(request,id):
     context = {
         "blog":blog
     }
-    return render(request,"crud/index.html",context)
+    return render(request,"crud/particular.html",context)
 
 def contacts(request):
     if(request.method == "POST"):

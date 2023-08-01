@@ -23,44 +23,30 @@
                 
                 <div class="my-5">
                
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <form id="contactForm" method="post">
+                        {%csrf_token%}
                         <div class="form-floating">
-                            <input class="form-control" id="title" for="id_title" name="title" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                            <label for="name">Title</label>
+                            <input class="form-control" id="id_title" for="id_title" name="title" type="text" value="{{title}}" placeholder="Enter your name..."  autofocus data-sb-validations="required" />
+                            <label for="id_title">Title</label>
                             <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control" id="subheading" for="id_subheading"name="subheading" type="text" placeholder="Enter your email..." data-sb-validations="required,email" />
-                            <label for="email">SubHeading</label>
+                            <input class="form-control" id="id_subheading" for="id_subheading" name="subheading" type="text" value="{{subheading}}" placeholder="Enter your email..." data-sb-validations="required,email" />
+                            <label for="id_subheading">SubHeading</label>
                             <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                             <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                         </div>
                      
                         <div class="form-floating">
-                            <textarea class="form-control" id="message" for="id_description" name="description" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
-                            <label for="message">Message</label>
+                            <textarea class="form-control" id="id_description" for="id_description" name="description" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required">{{description}}</textarea>
+                            <label for="id_description">Description</label>
                             <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                         </div>
                         <br />
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br />
-                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                       
+                       
                         <!-- Submit Button-->
-                        <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button>
+                        <button class="btn btn-primary text-uppercase " id="submitButton" type="submit">Send</button>
                     </form>
                 </div>
             </div>
