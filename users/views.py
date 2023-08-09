@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import logout
+from django.contrib.auth import logout,authenticate,login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def registerUser(request):
@@ -27,12 +28,29 @@ def registerUser(request):
 
     return render(request,"users/register.html")
 
-
-
 def loginUser(request):
-    print(request.user)
-    return render(request,"users/login.html")
+    if(request.user.is_authenticated):
+        return redirect("crud:home")
+    else:
 
+        print(request.user)
+        if request.method == "POST":
+            username=request.POST.get("username")
+            password=request.POST.get("password")
+            
+            user=authenticate(request,username=username,password=password)
+            if user is not None:
+                login(request,user)
+                return redirect("crud:home")
+            else:
+                print("User Validation Failed - 401")
+                return redirect("users:signin")
+        return render(request,"users/login.html")
+
+@login_required
 def logoutUser(request):
     logout(request)
     return redirect("crud:home")
+
+
+

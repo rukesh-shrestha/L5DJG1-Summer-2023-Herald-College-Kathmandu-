@@ -141,3 +141,5 @@ DEFAULT_FROM_EMAIL= "rukesh.shrestha@heraldcollege.edu.np"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL='/users/login'
