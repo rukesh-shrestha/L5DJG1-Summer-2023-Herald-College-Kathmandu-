@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from projectdemo.settings import EMAIL_HOST_USER #replace root with your project name
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -26,9 +27,11 @@ def index(request):
 def about(request):
     return render(request,"crud/about.html")
 
+@login_required
 def create(request):
     form = BlogForm(request.POST or None)
-    if form.is_valid():
+  
+    if form.is_valid():        
         form.save()
         return  redirect("crud:home")
     return render(request,"crud/createblog.html",{"form":form})
