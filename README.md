@@ -1,5 +1,5 @@
 # Blog Application Summer Django Class
-Summer 2023
+#### L5DJG1 - Summer 2023 - Herald College Kathmandu 
 
 To download and use the projecct in your local machine. Follow the below mention steps:
 - Clone the Project
