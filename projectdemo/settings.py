@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['blogapp-d4d9.onrender.com','blog.rukesh-shrestha.com.np']
+ALLOWED_HOSTS = ['blog.rukesh-shrestha.com.np']
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Application definition
 
@@ -157,3 +157,11 @@ DEFAULT_FROM_EMAIL= config('DEFAULT_FROM_EMAIL')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL='/users/login'
+
+
+CSRF_COOKIE_SECURE=True
+SESSION_COOKIE_SECURE=True
+SECURE_SSL_REDIRECT=True
+SECURE_HSTS_SECONDS=True
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_PRELOAD=True
